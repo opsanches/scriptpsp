@@ -49,7 +49,7 @@ Rename-Computer -NewName $computerName
 
 # Enable Local Admin
 Write-Output "Enter new Password for Administrator:"
-$Password = Read-Host
+$Password = Read-Host -AsSecureString
 $UserAccount = Get-LocalUser -Name Administrator
 $UserAccount | Set-LocalUser -Password $Password
 Enable-LocalUser -Name "administrator"
@@ -159,6 +159,11 @@ New-ItemProperty -Path HKLM:\System\CurrentControlSet\Control\CrashControl -Name
 #[byte[]]$bytes = Get-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Encoding Byte -Raw
 #$bytes[0x15] = $bytes[0x15] -bor 0x20
 #Set-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Value $bytes -Encoding Byte -Force
+
+
+# Fix blank Icons
+Write-output "Clearing IconCache"
+rm C:\Users\$env:UserName\appdata\Local\IconCache.db
 
 # Make Portuguese default language
 # Get-WinUserLanguageList
