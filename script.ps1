@@ -87,19 +87,6 @@ Remove-LocalGroupMember -Group Administrators -Member $currentUser
 # $deleteUser = Read-host
 # Remove-LocalUser -Name $deleteUser
 
-# Make Portuguese default language
-# Get-WinUserLanguageList
-Write-Output "###################################"
-Write-Output "##                               ##"
-Write-Output "## Setting Portuguese as Default ##"
-Write-Output "##  Finish this in the Settings  ##"
-Write-Output "##   You can close this window   ##"
-Write-Output "##                               ##"
-Write-Output "###################################"
-Set-WinSystemLocale pt-BR
-Set-WinUserLanguageList pt-BR -Force
-install-language pt-BR -CopyToSettings
-
 ## Do not use sign-in info to automatically finish setting up device and reopen apps after an update or restart
 Write-Output "Do not use sign-in info to automatically finish setting up device"
 $SID = (Get-CimInstance -ClassName Win32_UserAccount | Where-Object -FilterScript {$_.Name -eq $env:USERNAME}).SID
@@ -173,13 +160,15 @@ New-ItemProperty -Path HKLM:\System\CurrentControlSet\Control\CrashControl -Name
 #$bytes[0x15] = $bytes[0x15] -bor 0x20
 #Set-Content -Path "$env:APPDATA\Microsoft\Windows\Start menu\Programs\System Tools\Command Prompt.lnk" -Value $bytes -Encoding Byte -Force
 
-
-
-
-
-
-
-
-
-
-
+# Make Portuguese default language
+# Get-WinUserLanguageList
+Write-Output "###################################"
+Write-Output "##                               ##"
+Write-Output "## Setting Portuguese as Default ##"
+Write-Output "##  Finish this in the Settings  ##"
+Write-Output "##   You can close this window   ##"
+Write-Output "##                               ##"
+Write-Output "###################################"
+Set-WinSystemLocale pt-BR
+Set-WinUserLanguageList pt-BR -Force
+install-language pt-BR -CopyToSettings
